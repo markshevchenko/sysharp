@@ -5,7 +5,7 @@ namespace SySharp
 {
     public class SimplifyVisitor : ExpressionVisitor
     {
-        protected Expression Simplify(Expression expression) => Visit(expression);
+        protected internal Expression Simplify(Expression expression) => Visit(expression);
 
         protected override Expression VisitBinary(BinaryExpression node)
         {
@@ -14,15 +14,21 @@ namespace SySharp
                 case ExpressionType.Add:
                     return SimplifySum(node.Left, node.Right);
 
+                case ExpressionType.Subtract:
+                    return SimplifySubtract(node.Left, node.Right);
+
                 case ExpressionType.Multiply:
                     return SimplifyProduct(node.Left, node.Right);
+
+                case ExpressionType.Divide:
+                    return SimplifyDivide(node.Left, node.Right);
 
                 default:
                     return node;
             }
         }
 
-        internal Expression SimplifySum(Expression left, Expression right)
+        private Expression SimplifySum(Expression left, Expression right)
         {
             if (TryCalculate(left, right, (a, b) => a + b, out double value))
                 return Expression.Constant(value);
@@ -42,7 +48,27 @@ namespace SySharp
             return Expression.Add(left, right);
         }
 
-        internal Expression SimplifyProduct(Expression left, Expression right)
+        private Expression SimplifySubtract(Expression left, Expression right)
+        {
+            if (TryCalculate(left, right, (a, b) => a - b, out double value))
+                return Expression.Constant(value);
+
+            if (left is ConstantExpression { Value: 0.0 })
+                return Expression.Negate(Simplify(right));
+
+            if (right is ConstantExpression { Value: 0.0 })
+                return Simplify(left);
+
+            left = Simplify(left);
+            right = Simplify(right);
+
+            if (left == right)
+                return Expression.Constant(0.0);
+
+            return Expression.Subtract(left, right);
+        }
+
+        private Expression SimplifyProduct(Expression left, Expression right)
         {
             if (TryCalculate(left, right, (a, b) => a * b, out double value))
                 return Expression.Constant(value);
@@ -65,7 +91,24 @@ namespace SySharp
             return Expression.Multiply(left, right);
         }
 
-        internal bool TryCalculate(Expression left, Expression right, Func<double, double, double> calculator, out double value)
+        private Expression SimplifyDivide(Expression left, Expression right)
+        {
+            if (TryCalculate(left, right, (a, b) => a / b, out double value))
+                return Expression.Constant(value);
+
+            if (left is ConstantExpression { Value: 0.0 })
+                return Expression.Constant(0.0);
+
+            if (right is ConstantExpression { Value: 1.0 })
+                return Simplify(left);
+
+            left = Simplify(left);
+            right = Simplify(right);
+
+            return Expression.Divide(left, right);
+        }
+
+        private bool TryCalculate(Expression left, Expression right, Func<double, double, double> calculator, out double value)
         {
             if (TryGetValue(left, out double leftValue) && TryGetValue(right, out double rightValue))
             {
@@ -78,7 +121,7 @@ namespace SySharp
             return false;
         }
 
-        internal bool TryGetValue(Expression expression, out double value)
+        private bool TryGetValue(Expression expression, out double value)
         {
             value = default;
             if (expression is ConstantExpression constant)

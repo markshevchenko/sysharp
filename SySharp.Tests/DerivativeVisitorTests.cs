@@ -61,5 +61,65 @@ namespace SySharp.Tests
                 Right: BinaryExpression { NodeType: ExpressionType.Multiply }
             });
         }
+
+        [Fact]
+        public void D_WithXPow3_Returns3MulXPow2()
+        {
+            Expression<Func<double, double>> f = x => Math.Pow(x, 3);
+
+            var actual = _derivativeVisitor.D(f.Body).ToString();
+
+            Assert.Equal("(3 * Pow(x, (3 - 1)))", actual);
+        }
+
+        [Fact]
+        public void D_With3PowX_Returns3PowXMulLog3()
+        {
+            Expression<Func<double, double>> f = x => Math.Pow(3, x);
+
+            var actual = _derivativeVisitor.D(f.Body).ToString();
+
+            Assert.Equal("(Pow(3, x) * Log(3))", actual);
+        }
+
+        [Fact]
+        public void D_WithSinX_Returns1MulCosX()
+        {
+            Expression<Func<double, double>> f = x => Math.Sin(x);
+
+            var actual = _derivativeVisitor.D(f.Body).ToString();
+
+            Assert.Equal("(1 * Cos(x))", actual);
+        }
+
+        [Fact]
+        public void D_WithCosX_Returns1MulNegSinX()
+        {
+            Expression<Func<double, double>> f = x => Math.Cos(x);
+
+            var actual = _derivativeVisitor.D(f.Body).ToString();
+
+            Assert.Equal("(1 * -Sin(x))", actual);
+        }
+
+        [Fact]
+        public void D_WithTanX_Returns1DivCos2X()
+        {
+            Expression<Func<double, double>> f = x => Math.Tan(x);
+
+            var actual = _derivativeVisitor.D(f.Body).ToString();
+
+            Assert.Equal("(1 / Pow(Cos(x), 2))", actual);
+        }
+
+        [Fact]
+        public void D_WithLogX_Returns1DivX()
+        {
+            Expression<Func<double, double>> f = x => Math.Log(x);
+
+            var actual = _derivativeVisitor.D(f.Body).ToString();
+
+            Assert.Equal("(1 / x)", actual);
+        }
     }
 }
