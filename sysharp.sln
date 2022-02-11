@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SySharp", "SySharp\SySharp.csproj", "{59C666A0-9FF9-4763-AC0B-1F3270FAC3C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SySharp.Tests", "SySharp.Tests\SySharp.Tests.csproj", "{50445E15-55DC-4300-ADDA-BBF62A751182}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SySharp.Tests", "SySharp.Tests\SySharp.Tests.csproj", "{50445E15-55DC-4300-ADDA-BBF62A751182}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FAEA0C37-80BC-4450-BBE9-32F2DA6BE8D1}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -11,8 +11,9 @@
     <PackageProjectUrl>https://github.com/markshevchenko/sysharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/markshevchenko/sysharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>Derivatives of constant, bound variable, sum, and product have been implemented.</PackageReleaseNotes>
+    <PackageReleaseNotes>Simplification has been implemented.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>1.5.0</Version>
   </PropertyGroup>
 
 </Project>

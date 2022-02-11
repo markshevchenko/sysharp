@@ -8,9 +8,9 @@ namespace SySharp
         private static readonly DerivativeVisitor _derivativeVisitor = new ();
         private static readonly SimplifyVisitor _simplifyVisitor = new ();
 
-        public static Expression Derivative(Expression<Func<double, double>> f) =>
+        public static LambdaExpression Derivative(this Expression<Func<double, double>> f) =>
             Expression.Lambda(_derivativeVisitor.D(f.Body), f.Parameters);
 
-        public static Expression Simplify(Expression expression) => _simplifyVisitor.Visit(expression);
+        public static Expression Simplify(this Expression expression) => _simplifyVisitor.Visit(expression);
     }
 }
