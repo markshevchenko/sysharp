@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Mark Shevchenko</Authors>
+    <Company />
+    <Description>Simple symbolic calculation library to demonstrate the power of expressions in C#.</Description>
+    <Copyright>Mark Shevchenko</Copyright>
+    <PackageLicenseFile></PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/markshevchenko/sysharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/markshevchenko/sysharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>Derivatives of constant, bound variable, sum, and product have been implemented.</PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
 </Project>
