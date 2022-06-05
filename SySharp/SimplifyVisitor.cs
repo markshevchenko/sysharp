@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq.Expressions;
 
 namespace SySharp
@@ -128,6 +129,7 @@ namespace SySharp
             {
                 if (constant.Type == typeof(double) || constant.Type == typeof(int))
                 {
+                    Debug.Assert(constant.Value != null);
                     value = (double)constant.Value;
 
                     return true;

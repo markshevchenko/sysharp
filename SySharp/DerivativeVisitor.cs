@@ -8,16 +8,16 @@ namespace SySharp
 {
     public class DerivativeVisitor : ExpressionVisitor
     {
-        private readonly static ConstantExpression _zero = Expression.Constant(0.0);
-        private readonly static ConstantExpression _one = Expression.Constant(1.0);
-        private readonly static ConstantExpression _two = Expression.Constant(2.0);
-        private readonly static Type[] _double1 = new[] { typeof(double) };
-        private readonly static Type[] _double2 = new[] { typeof(double), typeof(double) };
-        private readonly static MethodInfo _pow = typeof(Math).GetMethod(nameof(Math.Pow), _double2);
-        private readonly static MethodInfo _sin = typeof(Math).GetMethod(nameof(Math.Sin), _double1);
-        private readonly static MethodInfo _cos = typeof(Math).GetMethod(nameof(Math.Cos), _double1);
-        private readonly static MethodInfo _tan = typeof(Math).GetMethod(nameof(Math.Tan), _double1);
-        private readonly static MethodInfo _log = typeof(Math).GetMethod(nameof(Math.Log), _double1);
+        private static readonly ConstantExpression _zero = Expression.Constant(0.0);
+        private static readonly ConstantExpression _one = Expression.Constant(1.0);
+        private static readonly ConstantExpression _two = Expression.Constant(2.0);
+        private static readonly Type[] _double1 = new[] { typeof(double) };
+        private static readonly Type[] _double2 = new[] { typeof(double), typeof(double) };
+        private static readonly MethodInfo _pow = typeof(Math).GetMethod(nameof(Math.Pow), _double2)!;
+        private static readonly MethodInfo _sin = typeof(Math).GetMethod(nameof(Math.Sin), _double1)!;
+        private static readonly MethodInfo _cos = typeof(Math).GetMethod(nameof(Math.Cos), _double1)!;
+        private static readonly MethodInfo _tan = typeof(Math).GetMethod(nameof(Math.Tan), _double1)!;
+        private static readonly MethodInfo _log = typeof(Math).GetMethod(nameof(Math.Log), _double1)!;
 
         internal Expression D(Expression expression) => Visit(expression);
 
