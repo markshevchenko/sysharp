@@ -7,7 +7,6 @@
     <Company />
     <Description>Simple symbolic calculation library to demonstrate the power of expressions in C#.</Description>
     <Copyright>Mark Shevchenko</Copyright>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/markshevchenko/sysharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/markshevchenko/sysharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
